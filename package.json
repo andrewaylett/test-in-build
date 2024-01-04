@@ -1,0 +1,55 @@
+{
+  "name": "test-in-build",
+  "description": "Validate your library by installing it into test builds.",
+  "author": "Andrew Aylett",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewaylett/test-in-build.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module",
+  "source": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "npm run buildonly",
+    "buildonly": "tsc -b --verbose .",
+    "clean": "rm -rf build dist",
+    "dev": "npm run buildonly && npm run lint:fix && npm run build",
+    "lint": "eslint .",
+    "lint:fix": "npm run lint -- --fix",
+    "postbuild": "npm run test",
+    "prepare": "npm run buildonly",
+    "posttest": "prepackage-checks && downgrade-build build",
+    "prepublishOnly": "npm run clean && npm run build",
+    "pretest": "npm run lint",
+    "test": "npm run test:packages",
+    "test:packages": "node --loader ts-node/esm test/packages.test.ts"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "dependencies": {
+    "extend-expect": "^3"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "18.2.2",
+    "@types/node": "20.10.6",
+    "downgrade-build": "1.0.0",
+    "eslint": "8.56.0",
+    "eslint-config-andrewaylett": "3.0.0",
+    "prepackage-checks": "0.1.2",
+    "prettier": "3.1.1",
+    "ts-node": "10.9.2",
+    "typescript": "5.3.3"
+  }
+}

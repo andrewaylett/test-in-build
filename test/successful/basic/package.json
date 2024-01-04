@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "test": "node test/packages.test.js"
+  },
+  "type": "module",
+  "name": "basic",
+  "version": "1.0.0",
+  "devDependencies": {}
+}

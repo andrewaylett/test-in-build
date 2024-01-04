@@ -1,0 +1,3 @@
+{
+  "extends": ["config:base", "config:js-lib", "github>andrewaylett/renovate-config", ":assignAndReview(andrewaylett)"]
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "..",
+  "include": ["./**.ts"],
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "../dist",
+    "tsBuildInfoFile": "../build/src.tsBuildInfo"
+  }
+}
