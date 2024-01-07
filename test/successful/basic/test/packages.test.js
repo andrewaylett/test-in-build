@@ -1,4 +1,4 @@
-import { testBuild } from 'test-build';
+import { testBuild } from 'test-in-build';
 
 await testBuild('.', 'test', (details) => {
     return Promise.resolve({
