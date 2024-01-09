@@ -38,6 +38,10 @@ import os from 'node:os';
 
 import { expect } from './expect.js';
 
+import type { Expect } from './expect.js';
+
+export type { Expect } from './expect.js';
+
 export interface TestDetails {
     name: string;
     testDirectory: string;
@@ -50,10 +54,16 @@ export interface SpawnInstructions {
     cwd?: string;
 }
 
+export type TestStep = (
+    details: TestDetails,
+) => Promise<SpawnInstructions> | SpawnInstructions;
+
+export type AssertFunction = (blob: string, expect: Expect) => void;
+
 export async function testBuild(
     projectDirectoryRel: string,
     testParentLocation: string,
-    testStep: (details: TestDetails) => Promise<SpawnInstructions>,
+    testStep: TestStep,
 ) {
     const projectDirectory = path.resolve(projectDirectoryRel);
     const testParentDirectory = path.resolve(
